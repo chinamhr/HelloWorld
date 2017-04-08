@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+				 	 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				     http://www.springframework.org/schema/context 
+				 	 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- <bean class="com.spring.mhr.event.MailSendListener"/>
+	<bean id="mailSender" class="com.spring.mhr.event.MailSender"/>	 -->
+	
+	<bean id="greetingBefore" class="com.spring.mhr.advice.GreetingBeforeAdvice"/>
+	<bean id="greetingAfter" class="com.spring.mhr.advice.GreetingAfterAdvice"/>
+	<bean id="target" class="com.spring.mhr.advice.NaiveWaiter"/>
+	<bean id="waiter" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="com.spring.mhr.advice.Waiter"
+		p:interceptorNames="greetingBefore,greetingAfter"
+		p:target-ref="target"
+	/>
+	
+	
+</beans>
+			 	 
